@@ -35,7 +35,7 @@ Running `exportfs` you should see something similar to:
 
 ##Installation
 
-1. Create the PersistantVolume
+1. Create the PersistantVolume:
 
 	osc create -f persistent-volume.yaml
 
