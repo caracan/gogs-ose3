@@ -1,0 +1,72 @@
+kind: List
+apiVersion: v1beta3
+items:
+- kind: DeploymentConfig
+  apiVersion: v1beta3
+  metadata:
+    name: gogs-dc
+  spec:
+    replicas: 1
+    selector:
+      name: gogs-container
+    strategy:
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          name: gogs-container
+      spec:
+        volumes:
+        - name: pvol
+          persistantVolumeClaim:
+            claimName: gogs-claim        
+        containers:
+        - capabilities: {}
+          image: codeskyblue/docker-gogs
+          imagePullPolicy: PullIfNotPresent
+          livenessProbe:
+            initialDelaySeconds: 20
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 1
+          name: gogs-container
+          ports:
+          - containerPort: 3000
+            name: gogs-tcp-8080
+            protocol: TCP
+          - containerPort: 22
+            name: gogs-tcp-22
+            protocol: TCP
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - mountPath: /data
+            name: pvol
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          region: infra
+        restartPolicy: Always
+        serviceAccount: ''
+    triggers:
+    - type: ConfigChange
+         
+- kind: Service
+  apiVersion: v1beta3
+  metadata:
+    name: gogs-service
+  spec:
+    ports:
+    - port: 3000
+    selector:
+      name: gogs-container
+
+- kind: Route
+  apiVersion: v1beta1
+  metadata:
+    name: gogs-route
+  host: gogs.cloudapps.example.com
+  serviceName: gogs-service
