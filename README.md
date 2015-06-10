@@ -24,7 +24,7 @@ This assumes you have followed the [training](https://github.com/openshift/train
 
 3. Export
 
-	exportfs -a
+        exportfs -a
 
 Running `exportfs` you should see something similar to:
 
@@ -37,15 +37,15 @@ Running `exportfs` you should see something similar to:
 
 1. Create the PersistantVolume:
 
-	osc create -f persistent-volume.yaml
+        osc create -f persistent-volume.yaml
 
 2. Create the PersistantVolumeClaim
 
-	osc create -f persistent-volume-claim.yaml
+        osc create -f persistent-volume-claim.yaml
 
 3. Create the pods, service & route
 
-	osc create -f gogs.yaml
+        osc create -f gogs.yaml
 
 ##Running
 
