@@ -35,6 +35,8 @@ Running `exportfs` you should see something similar to:
 
 ##Installation
 
+This assumes you are creating this within the default namespace, i.e. running as the admin user. If you wish to create a seperate project to run this in then step one (Creating the PersistantVolume) still needs to be ran as the admininistrator.
+
 1. Create the PersistantVolume:
 
         osc create -f persistent-volume.yaml
@@ -46,6 +48,7 @@ Running `exportfs` you should see something similar to:
 3. Create the pods, service & route
 
         osc create -f gogs.yaml
+
 
 ##Running
 
