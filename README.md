@@ -2,7 +2,7 @@
 
 Running a the [Gogs](http://gogs.io/) Git service as a container within OSE v3 (Beta4), with a persistant volume to survive restarts.
 
-Currently it is configured to run in the infra labeled nodes (i.e. the master).
+Currently it is configured to run in the infra labeled nodes (i.e. the master) and uses the [codeskyblue/docker-gogs](https://github.com/codeskyblue/docker-gogs) docker image.
 
 ##OSE Environment Config
 
