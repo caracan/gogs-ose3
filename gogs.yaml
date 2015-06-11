@@ -14,7 +14,6 @@ items:
       type: Recreate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           name: gogs-container
       spec:
@@ -34,10 +33,10 @@ items:
           name: gogs-container
           ports:
           - containerPort: 3000
-            name: gogs-tcp-8080
+            name: gogs-http-8080
             protocol: TCP
           - containerPort: 22
-            name: gogs-tcp-22
+            name: gogs-ssh-22
             protocol: TCP
           securityContext:
             capabilities: {}
@@ -61,6 +60,9 @@ items:
   spec:
     ports:
     - port: 3000
+    selector:
+      name: gogs-container
+    - port: 22
     selector:
       name: gogs-container
 
