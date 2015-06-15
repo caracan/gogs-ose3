@@ -33,7 +33,7 @@ items:
           name: gogs-container
           ports:
           - containerPort: 3000
-            name: gogs-http-8080
+            name: gogs-http-3000
             protocol: TCP
           - containerPort: 22
             name: gogs-ssh-22
